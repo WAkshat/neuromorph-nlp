@@ -169,3 +169,4 @@ upper bound. The Wikipedia row is the more honest one.
 Next steps and open questions: [docs/FUTURE_RESEARCH.md](docs/FUTURE_RESEARCH.md).
 Audit of the original: [docs/ARCHITECTURE_AUDIT.md](docs/ARCHITECTURE_AUDIT.md).
 Design rationale: [docs/ARCHITECTURE_PROPOSAL.md](docs/ARCHITECTURE_PROPOSAL.md).
+Full technical write-up with all numbers: [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md).
