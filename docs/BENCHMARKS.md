@@ -178,6 +178,9 @@ What this establishes and what it does not:
   so they cannot show whether real overclaims are caught. I did not read the original's 50
   flags, so its count is a rate, not a judged precision.
 
+Flagged sentences quoted in `benchmarks/results/real_text_*.json` are from Wikipedia
+(CC BY-SA 4.0); article titles and revision ids are recorded alongside them.
+
 The held-out findings were deliberately *not* used to change the system; fixing them and
 re-measuring on the same articles would turn the held-out set into a tuning set.
 
