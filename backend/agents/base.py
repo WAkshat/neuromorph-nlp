@@ -10,7 +10,7 @@ from textutils import ClaimAnalysis
 
 class AgentRole(str, Enum):
     VIEWER = "viewer"            # segments the document into candidate claims
-    THINKER = "thinker"          # linguistic analysis: clauses, negation, absolutes, entities
+    THINKER = "thinker"          # linguistic analysis: clauses, negation, absolute terms
     RECALL = "recall"            # retrieves evidence per claim
     CHECKER = "checker"          # runs the verifiers
     SYNTHESIZER = "synthesizer"  # produces the report

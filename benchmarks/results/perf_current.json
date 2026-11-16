@@ -1,0 +1,37 @@
+{
+ "system": "current",
+ "rows": [
+  {
+   "sentences": 10,
+   "distinct_sentences": 10,
+   "median_ms": 1.3479999997798586,
+   "peak_mib": 0.023769378662109375,
+   "distinct_examined": 10,
+   "gold_flag_recall": 1.0
+  },
+  {
+   "sentences": 100,
+   "distinct_sentences": 100,
+   "median_ms": 13.34050000014031,
+   "peak_mib": 0.215057373046875,
+   "distinct_examined": 100,
+   "gold_flag_recall": 0.9846153846153847
+  },
+  {
+   "sentences": 1000,
+   "distinct_sentences": 140,
+   "median_ms": 125.96819999998843,
+   "peak_mib": 2.107577323913574,
+   "distinct_examined": 140,
+   "gold_flag_recall": 0.9571428571428572
+  },
+  {
+   "sentences": 5000,
+   "distinct_sentences": 140,
+   "median_ms": 628.4285000001546,
+   "peak_mib": 10.365826606750488,
+   "distinct_examined": 140,
+   "gold_flag_recall": 0.9571428571428572
+  }
+ ]
+}

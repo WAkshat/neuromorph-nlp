@@ -1,0 +1,153 @@
+[
+ {
+  "title": "Event camera",
+  "revid": 1362464116,
+  "sentences": 38,
+  "flagged": []
+ },
+ {
+  "title": "Hebbian theory",
+  "revid": 1382839520,
+  "sentences": 104,
+  "flagged": [
+   {
+    "sentence": "Since a correlation matrix is always a positive-definite matrix, the eigenvalues are all positive, and one can easily see how the above solution is always exponentially divergent in time.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('always'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "This is an intrinsic problem due to this version of Hebb's rule being unstable, as in any network with a dominant signal the synaptic weights will increase or decrease exponentially.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('any network'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "One may think a solution is to limit the firing rate of the postsynaptic neuron by adding a non-linear, saturating response function f, but in fact, it can be shown that for any neuron model, Hebb's rule is unstable.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('any neuron model'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "For instance, people who have never played the piano do not activate brain regions involved in playing the piano when listening to piano music.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('never'). Universal claims are rarely supported by evidence in this field."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Biological neuron model",
+  "revid": 1378207583,
+  "sentences": 321,
+  "flagged": [
+   {
+    "sentence": "(The non-leaky integrate-and-fire model is retrieved in the limit Rm to infinity, i.e. if the membrane is a perfect insulator).",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('perfect'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "This neuron used in SNNs through surrogate gradient creates an adaptive learning rate yielding higher accuracy and faster convergence, and flexible long short-term memory compared to existing counterparts in the literature.",
+    "types": [
+     "contradicts_knowledge_base"
+    ],
+    "explanations": [
+     "SNNs are not generally more accurate than ANNs; they often trade accuracy for efficiency."
+    ]
+   },
+   {
+    "sentence": "Similarly, for all spiking neuron models, the transfer function φ can be calculated numerically (or analytically).",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('all spiking neuron models'). Universal claims are rarely supported by evidence in this field."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Neural coding",
+  "revid": 1374681090,
+  "sentences": 218,
+  "flagged": [
+   {
+    "sentence": "Action potentials, which act as the primary carrier of information in biological neural networks, are generally uniform regardless of the type of stimulus or the specific type of neuron.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('regardless of'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "If Δt is small, there will never be more than one spike within the interval between t and t+Δt on any given trial.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('never'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "Thus, the time-dependent firing rate coding relies on the implicit assumption that there are always populations of neurons.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('always'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "Researchers, through optogenetics, have the tools to effect different temporal codes in a neuron while maintaining the same mean firing rate, and thereby can test whether or not temporal coding occurs in specific neural circuits.",
+    "types": [
+     "contradicts_knowledge_base"
+    ],
+    "explanations": [
+     "Temporal coding uses precise spike timing; the mean firing rate is rate coding."
+    ]
+   },
+   {
+    "sentence": "Early work suggested that correlation between spike trains can only reduce, and never increase, the total mutual information present in the two spike trains about a stimulus feature.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('never'). Universal claims are rarely supported by evidence in this field."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Cognitive computer",
+  "revid": 1384319408,
+  "sentences": 55,
+  "flagged": [
+   {
+    "sentence": "This offers around 130 million synapses, far less than the human brain's 800 trillion synapses, and behind IBM's TrueNorth.",
+    "types": [
+     "numeric_mismatch"
+    ],
+    "explanations": [
+     "'800 trillion synapses' does not match the documented figure (about 256,000,000 synapses)."
+    ]
+   }
+  ]
+ }
+]

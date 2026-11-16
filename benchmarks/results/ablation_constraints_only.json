@@ -1,0 +1,662 @@
+{
+ "summary": {
+  "system": "current",
+  "split": "test",
+  "config": {
+   "verifiers": [
+    "constraints"
+   ]
+  },
+  "n": 70,
+  "tp": 22,
+  "fp": 0,
+  "fn": 13,
+  "tn": 35,
+  "precision": 1.0,
+  "recall": 0.6285714285714286,
+  "f1": 0.7719298245614035,
+  "accuracy": 0.8142857142857143,
+  "f1_ci95": [
+   0.6399999999999999,
+   0.88
+  ],
+  "flag_rate_by_category": {
+   "correct_fact": {
+    "flagged": 0,
+    "total": 12
+   },
+   "correct_negation": {
+    "flagged": 0,
+    "total": 10
+   },
+   "factual_error": {
+    "flagged": 14,
+    "total": 14
+   },
+   "hedged": {
+    "flagged": 0,
+    "total": 8
+   },
+   "neutral": {
+    "flagged": 0,
+    "total": 5
+   },
+   "overclaim": {
+    "flagged": 3,
+    "total": 12
+   },
+   "paraphrased_myth": {
+    "flagged": 5,
+    "total": 9
+   }
+  },
+  "mean_latency_ms": 0.1782457142910841
+ },
+ "items": [
+  {
+   "id": "t-o1",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Spiking neural networks always outperform conventional deep networks on image classification benchmarks.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-o2",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Our neuromorphic accelerator guarantees lower energy consumption than any GPU for every workload.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o3",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Event-driven processors consume zero energy whenever no spikes are present in the network.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o4",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Neuromorphic hardware will completely replace GPUs for training large deep learning models within a few years.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-o5",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "STDP is sufficient to solve all supervised learning problems without any labelled data or error signal.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o6",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "ANN-to-SNN conversion never causes any loss of accuracy, regardless of the number of timesteps used.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o7",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Spiking networks are universally more energy efficient than artificial neural networks on all hardware platforms.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o8",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Temporal coding is perfectly robust to noise and never requires more than a single spike per neuron.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o9",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Leaky integrate-and-fire neurons are a fully biologically realistic model of cortical pyramidal cells.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-o10",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Memristive synapses have unlimited endurance and store analog weights with perfect precision.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o11",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Surrogate gradient training is guaranteed to converge to the global optimum for any spiking architecture.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-o12",
+   "label": "flag",
+   "category": "overclaim",
+   "text": "Every neuromorphic chip available today supports online learning directly on the device.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-f1",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "IBM TrueNorth provides rich programmable on-chip learning through spike-timing-dependent plasticity.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f2",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "Intel's TrueNorth processor was introduced in 2014 with one million digital neurons.",
+   "pred": "flag",
+   "issue_types": [
+    "misattribution"
+   ]
+  },
+  {
+   "id": "t-f3",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "The Loihi research chip was designed by IBM and fabricated in a 14 nm process.",
+   "pred": "flag",
+   "issue_types": [
+    "misattribution"
+   ]
+  },
+  {
+   "id": "t-f4",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "TrueNorth integrates roughly one billion neurons and 256 billion synapses on a single chip.",
+   "pred": "flag",
+   "issue_types": [
+    "numeric_mismatch"
+   ]
+  },
+  {
+   "id": "t-f5",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "SpiNNaker is an analog mixed-signal system built at Heidelberg University.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base",
+    "misattribution"
+   ]
+  },
+  {
+   "id": "t-f6",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "BrainScaleS is a fully digital platform that runs strictly in biological real time.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f7",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "The first Loihi chip contains approximately 130 million neurons across its neuromorphic cores.",
+   "pred": "flag",
+   "issue_types": [
+    "numeric_mismatch"
+   ]
+  },
+  {
+   "id": "t-f8",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "The spike function is smooth and differentiable, so standard backpropagation applies to SNNs without modification.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f9",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "In rate coding, information is carried exclusively by the precise timing of individual spikes.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f10",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "STDP is a global supervised learning rule that requires backpropagating errors through the entire network.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f11",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "In classical STDP, a presynaptic spike arriving shortly before a postsynaptic spike weakens the synapse.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f12",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "The Hodgkin-Huxley model is simpler and computationally cheaper than the leaky integrate-and-fire model.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f13",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "Dynamic vision sensors output full image frames at a fixed rate just like conventional cameras.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-f14",
+   "label": "flag",
+   "category": "factual_error",
+   "text": "The term neuromorphic engineering was coined by Geoffrey Hinton in the early 2010s.",
+   "pred": "flag",
+   "issue_types": [
+    "misattribution"
+   ]
+  },
+  {
+   "id": "t-p1",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "There is no longer any reason to use graphics processors now that neuromorphic chips exist.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-p2",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Idle neuromorphic circuits draw no power at all, since nothing happens between spikes.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-p3",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Whatever the benchmark, a spiking model will be the more accurate choice compared with an ANN.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-p4",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Both TrueNorth and Loihi let you train synaptic weights directly on the chip using local plasticity.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-p5",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Modern SNN simulations faithfully reproduce the full biophysics of real neurons in the brain.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-p6",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Rate coding and temporal coding are two names for exactly the same spike encoding scheme.",
+   "pred": "flag",
+   "issue_types": [
+    "contradicts_knowledge_base"
+   ]
+  },
+  {
+   "id": "t-p7",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Online learning on the device is a standard feature across the whole range of neuromorphic processors.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-p8",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Switching any model from a GPU to a neuromorphic chip cuts its energy use by orders of magnitude.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-p9",
+   "label": "flag",
+   "category": "paraphrased_myth",
+   "text": "Training spiking networks directly is cheap and needs far less computation than training an equivalent ANN.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c1",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "IBM TrueNorth contains one million neurons and 256 million configurable synapses.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c2",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Intel introduced the Loihi chip in 2018 with support for programmable on-chip learning rules.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c3",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "SpiNNaker is a digital neuromorphic platform from the University of Manchester built from ARM cores.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c4",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "BrainScaleS is a mixed-signal system from Heidelberg that emulates neural dynamics faster than biological real time.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c5",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Surrogate gradient methods replace the derivative of the spike function with a smooth approximation during training.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c6",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "In spike-timing-dependent plasticity, the sign of the weight change depends on the relative timing of pre- and postsynaptic spikes.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c7",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "The leaky integrate-and-fire neuron integrates input current and emits a spike when its membrane potential crosses a threshold.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c8",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Event cameras report per-pixel brightness changes asynchronously instead of capturing full frames.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c9",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Carver Mead introduced the term neuromorphic in the late 1980s to describe analog circuits that mimic neural systems.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c10",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Loihi 2 supports graded spikes and programmable neuron models, and is programmed through the open-source Lava framework.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c11",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Rate coding represents information in the average firing rate of a neuron over a time window.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-c12",
+   "label": "ok",
+   "category": "correct_fact",
+   "text": "Memristors are two-terminal devices whose resistance depends on the history of the current that has passed through them.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n1",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "SNNs are not always more accurate than ANNs, and often trail them on static image benchmarks.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n2",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "TrueNorth does not support on-chip learning; its weights are trained offline and then deployed.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n3",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Neuromorphic chips are not a general replacement for GPUs, which remain better suited to dense matrix workloads.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n4",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "It is a myth that idle neuromorphic hardware uses zero energy, because static leakage and clocking overheads remain.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n5",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Unlike Loihi, TrueNorth offers no programmable synaptic plasticity on the chip itself.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n6",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Energy savings from spiking hardware are not guaranteed and depend strongly on the sparsity of activity.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n7",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "The spike nonlinearity is not differentiable, which is why surrogate gradients are needed for backpropagation.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n8",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Few practical SNNs use Hodgkin-Huxley dynamics; most rely on simplified models that are far from biologically complete.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n9",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Not every neuromorphic platform supports online learning, so this capability must be checked per device.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-n10",
+   "label": "ok",
+   "category": "correct_negation",
+   "text": "Conversion from ANNs to SNNs rarely comes for free, since short simulation windows usually cost some accuracy.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h1",
+   "label": "ok",
+   "category": "hedged",
+   "text": "For sparse, event-driven workloads, neuromorphic processors can be substantially more energy efficient than GPUs.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h2",
+   "label": "ok",
+   "category": "hedged",
+   "text": "On some neuromorphic datasets such as DVS Gesture, directly trained SNNs reach accuracy comparable to ANNs.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h3",
+   "label": "ok",
+   "category": "hedged",
+   "text": "Spiking networks may offer latency advantages when inputs arrive as asynchronous event streams.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h4",
+   "label": "ok",
+   "category": "hedged",
+   "text": "In certain keyword-spotting tasks, Loihi has been reported to use considerably less energy per inference than a GPU.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h5",
+   "label": "ok",
+   "category": "hedged",
+   "text": "STDP can learn useful features without labels, although it typically underperforms supervised training on complex tasks.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h6",
+   "label": "ok",
+   "category": "hedged",
+   "text": "Temporal coding can in principle transmit information with fewer spikes than rate coding.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h7",
+   "label": "ok",
+   "category": "hedged",
+   "text": "Memristive crossbars could reduce the cost of synaptic operations, but device variability remains a challenge.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-h8",
+   "label": "ok",
+   "category": "hedged",
+   "text": "Under low activity, event-driven designs tend to consume less dynamic power than clocked accelerators.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-u1",
+   "label": "ok",
+   "category": "neutral",
+   "text": "This section reviews the main families of neuromorphic hardware and the software tools used to program them.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-u2",
+   "label": "ok",
+   "category": "neutral",
+   "text": "We evaluate our model on three event-based datasets and report accuracy together with average spike counts.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-u3",
+   "label": "ok",
+   "category": "neutral",
+   "text": "The remainder of the paper is organised as follows, beginning with background on spiking neuron models.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-u4",
+   "label": "ok",
+   "category": "neutral",
+   "text": "Neuromorphic computing draws inspiration from the structure and dynamics of biological nervous systems.",
+   "pred": "ok",
+   "issue_types": []
+  },
+  {
+   "id": "t-u5",
+   "label": "ok",
+   "category": "neutral",
+   "text": "Several research groups have released open-source simulators for spiking neural networks in recent years.",
+   "pred": "ok",
+   "issue_types": []
+  }
+ ]
+}

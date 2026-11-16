@@ -80,8 +80,9 @@ FACTS: list[Fact] = [
          "spiking neural networks.",
          "Furber et al., Proc. IEEE 102(5), 2014"),
     Fact("hardware.memristors",
-         "Memristors are two-terminal, non-volatile devices whose resistance depends on the "
-         "history of the current through them. They are studied as compact analog synapses, "
+         "Memristors are two-terminal devices whose resistance depends on the history of the "
+         "current through them. Most retain their state without power (non-volatile), although "
+         "volatile types exist. They are studied as compact analog synapses, "
          "with device variability and limited endurance as open challenges.",
          "Chua, IEEE Trans. Circuit Theory 18(5), 1971; Strukov et al., Nature 453, 2008"),
     Fact("hardware.online_learning_varies",
@@ -297,9 +298,9 @@ ATTRIBUTE_CONSTRAINTS: list[AttributeConstraint] = [
                         "coding_schemes.temporal_coding",
                         "Rate coding and temporal coding are different encoding schemes.",
                         context=r"\btemporal[- ]cod(?:ing|es?)\b"),
-    AttributeConstraint("memristor.two_terminal_nonvolatile", r"\bmemrist\w+",
-                        r"\bthree[- ]terminal\b|(?<!non-)(?<!non)\bvolatile\b", False,
-                        "hardware.memristors", "Memristors are two-terminal, non-volatile devices."),
+    # Deliberately says nothing about volatility: volatile (e.g. Mott) memristors exist.
+    AttributeConstraint("memristor.two_terminal", r"\bmemrist\w+", r"\bthree[- ]terminal\b", False,
+                        "hardware.memristors", "Memristors are two-terminal devices."),
     AttributeConstraint("gpu.not_replaced", r"\bgpus?\b|\bgraphics\s+process\w+",
                         r"\breplac\w+|\bobsolete\b|\bsupersed\w+|\bno\s+longer\s+(?:any\s+)?(?:need|reason)\b", False,
                         "performance.gpu",
@@ -370,20 +371,6 @@ ATTRIBUTION_CONSTRAINTS: list[AttributionConstraint] = [
 
 # Organisations recognised in "<Org> <chip>" / "<Org>'s <chip>" prefixes.
 KNOWN_ORGS = r"Intel|IBM|Manchester|Heidelberg|Stanford|Google|Qualcomm|Samsung|BrainChip|MIT|Nvidia|NVIDIA"
-
-ENTITY_PATTERNS: dict[str, str] = {
-    "Loihi": r"\bloihi\b", "TrueNorth": r"\btruenorth\b", "SpiNNaker": r"\bspinnaker\b",
-    "BrainScaleS": r"\bbrainscales\b", "memristor": r"\bmemrist\w+", "STDP": r"\bstdp\b|spike[- ]timing[- ]dependent",
-    "SNN": _SNN, "GPU": r"\bgpus?\b|graphics\s+process\w+", "LIF": r"leaky\s+integrate[- ]and[- ]fire|\blif\b",
-    "Hodgkin-Huxley": r"hodgkin[-–\s]+huxley", "event camera": r"event(?:[- ]based)?\s+(?:vision\s+)?(?:cameras?|sensors?)|dynamic\s+vision\s+sensors?",
-    "surrogate gradient": r"surrogate\s+gradients?", "rate coding": r"rate[- ]cod(?:ing|es?)",
-    "temporal coding": r"(?:temporal|latency)[- ]cod(?:ing|es?)",
-}
-
-
-def find_entities(text: str) -> list[str]:
-    return [name for name, pat in ENTITY_PATTERNS.items() if re.search(pat, text, re.IGNORECASE)]
-
 
 # --- retrieval ---------------------------------------------------------------------
 

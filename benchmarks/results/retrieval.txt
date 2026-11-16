@@ -1,0 +1,3 @@
+47 (claim, cited fact) pairs from constraint findings on dev+test
+  legacy substring overlap   recall@1 0.021  recall@3 0.149  facts returned per off-topic sentence 3.0
+  BM25                       recall@1 0.617  recall@3 0.894  facts returned per off-topic sentence 1.2

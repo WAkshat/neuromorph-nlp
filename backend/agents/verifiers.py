@@ -31,8 +31,12 @@ ABSOLUTE_PATTERNS: list[tuple[str, str]] = [
     ("universal quantifier", rf"\b(?:all|every|any)\s+(?:\w+\s+){{0,2}}?{_SCOPE}\b|\bin\s+all\b"),
     ("universally", r"\buniversally\b|\bacross\s+the\s+board\b|\bwithout\s+exception\b|\bregardless\s+of\b"
                     r"|\bwhatever\b|\bwhichever\b|\bwhatsoever\b"),
-    # "built entirely from", "composed completely of" describe composition, not scope.
-    ("totality adverb", r"\b(?:completely|entirely|totally|absolutely|perfectly)\b(?!\s+(?:from|of|by|in|on|with)\b)|\bfully\b(?![- ](?:connected|convolutional))"),
+    # A totality adverb only counts when it modifies an outcome ("completely eliminates",
+    # "fully solved", "entirely immune"). As a plain degree modifier ("fully spin-polarized",
+    # "entirely based on") it is descriptive: on Wikipedia prose that use was 5 of 9 false alarms.
+    ("total outcome", r"\b(?:completely|entirely|totally|absolutely|perfectly|fully)\s+(?:\w+\s+)?"
+                      r"(?:solv\w+|eliminat\w+|replac\w+|remov\w+|overc[oa]m\w+|prevent\w+|avoid\w+|clos\w+|"
+                      r"immune|robust|accurate|reliable|lossless|free|realistic|no)\b"),
     ("perfect", r"\bperfect\b|\bflawless\w*|\b100\s?%|\bunlimited\b|\binfinite\b"),
     ("impossible", r"\bimpossible\b"),
     ("zero cost", r"\b(?:zero|no)\s+(?:\w+\s+)?(?:energy|power)\b"),

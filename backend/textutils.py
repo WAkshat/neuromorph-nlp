@@ -100,7 +100,6 @@ class ClaimAnalysis:
     clauses: list[str]
     denial: bool                       # sentence frames its content as false ("it is a myth that ...")
     absolutes: list[dict] = field(default_factory=list)   # filled by the Thinker
-    entities: list[str] = field(default_factory=list)     # filled by the Thinker
     negation_aware: bool = True
 
 

@@ -1,0 +1,57 @@
+[
+ {
+  "title": "Neuromorphic computing",
+  "revid": 1381885409,
+  "sentences": 34,
+  "flagged": []
+ },
+ {
+  "title": "Spiking neural network",
+  "revid": 1384675387,
+  "sentences": 91,
+  "flagged": []
+ },
+ {
+  "title": "Memristor",
+  "revid": 1385826726,
+  "sentences": 319,
+  "flagged": [
+   {
+    "sentence": "Consequently, there is always a lower limit of energy requirement – depending on the required bit-error probability – for intentionally changing a bit value in any memory device.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('always', 'any memory device'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "In case one applies biases below the threshold value, there is still a finite probability that the device will switch in course of time (triggered by a random thermal fluctuation), but – as one is dealing with probabilistic processes – it is impossible to predict when the switching event will occur.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('impossible'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "The instantaneous electrical power entering such a device is completely dissipated as Joule heat to the surrounding, so no extra energy remains in the system after it has been brought from one resistance state xi to another one xj.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('no extra energy'). Universal claims are rarely supported by evidence in this field."
+    ]
+   },
+   {
+    "sentence": "Such a device would act as a memristor under all conditions, but would be less practical.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Unqualified absolute language ('all conditions'). Universal claims are rarely supported by evidence in this field."
+    ]
+   }
+  ]
+ }
+]

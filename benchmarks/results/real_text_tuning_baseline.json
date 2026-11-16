@@ -1,0 +1,157 @@
+[
+ {
+  "title": "Neuromorphic computing",
+  "revid": 1381885409,
+  "sentences": 34,
+  "flagged": []
+ },
+ {
+  "title": "Spiking neural network",
+  "revid": 1384675387,
+  "sentences": 91,
+  "flagged": [
+   {
+    "sentence": "For example humans can perform an image recognition task requiring no more than 10 ms of processing time per neuron through the successive layers (going from the retina to the temporal lobe).",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The precise spike timings in a small set of spiking neurons also has a higher information coding capacity compared with a rate-based approach.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The biology-inspired Hodgkin–Huxley model of a spiking neuron was proposed in 1952.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "As of 2019 SNNs lagged behind ANNs in accuracy, but the gap is decreasing, and has vanished on some tasks.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "SNNs are theoretically more powerful than so called \"second-generation networks\" defined as ANNs \"based on computational units that apply activation function with a continuous set of possible output values to a weighted sum (or polynomial) of the inputs\"; however, SNN training issues and hardware requirements limit their use.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Although unsupervised biologically inspired learning methods are available such as Hebbian learning and STDP, no effective supervised training method is suitable for SNNs that can provide better performance than second-generation networks.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "SNNs have much larger computational costs for simulating realistic neural models than traditional ANNs.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Moreover, SNNs utilizing neurons capable of SFA achieve levels of accuracy that rival those of conventional ANNs, while also requiring fewer neurons for comparable tasks.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Temporal coding; generating one spike per neuron, in which spike latency is inversely proportional to the pixel intensity.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Rate coding: converting pixel intensity into a spike train, where the number of spikes is proportional to the pixel intensity.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Phase coding; encoding temporal information into spike patterns based on a global oscillator.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Loihi, an Intel research chip, focuses on online learning and adaptability in neuromorphic modeling.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Dynap-se models developed by iniLabs, are a family of low-power, event-based neuromorphic chip intended for use in robotics and Internet of Things (IoT) applications.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "In addition, hardware based on memristors and other emerging memory technologies is being explored for the implementation of SNNs, with the goal of achieving lower power consumption and improved compatibility with biological neural models.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Memristor",
+  "revid": 1385826726,
+  "sentences": 319,
+  "flagged": [
+   {
+    "sentence": "Consequently, there is always a lower limit of energy requirement – depending on the required bit-error probability – for intentionally changing a bit value in any memory device.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   }
+  ]
+ }
+]

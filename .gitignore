@@ -11,3 +11,4 @@ frontend/build/
 frontend/*.tsbuildinfo
 benchmarks/results/*.tmp
 .pytest_cache/
+benchmarks/.cache/

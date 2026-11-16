@@ -1,4 +1,4 @@
-cross-encoder/nli-MiniLM2-L6-H768 on dev: 130.5 ms/claim
+cross-encoder/nli-MiniLM2-L6-H768 on dev: 134.8 ms/claim
 contradiction arm only (flag if c >= tc):
   tc=0.5                       TP=23 FP=10 FN=12  P=0.70 R=0.66
   tc=0.8                       TP=21 FP= 4 FN=14  P=0.84 R=0.60

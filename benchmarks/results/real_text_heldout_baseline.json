@@ -1,0 +1,487 @@
+[
+ {
+  "title": "Event camera",
+  "revid": 1362464116,
+  "sentences": 38,
+  "flagged": [
+   {
+    "sentence": "While the camera reports events with microsecond resolution, the actual temporal resolution (or, alternatively, the bandwidth for sensing) is on the order of tens of microseconds to a few milliseconds, depending on signal contrast, lighting conditions, and sensor design.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "It has been also shown that the image of a static scene can also be recovered from noise events only by analyzing their correlation with scene brightness.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Extension to multi-kernel event-driven convolutions allows for event-driven deep convolutional neural networks.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "These tasks become even more challenging given a moving camera, because events are triggered everywhere on the image plane, produced by moving objects and the static scene (whose apparent motion is induced by the camera's ego-motion).",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Hebbian theory",
+  "revid": 1382839520,
+  "sentences": 104,
+  "flagged": [
+   {
+    "sentence": "Since a correlation matrix is always a positive-definite matrix, the eigenvalues are all positive, and one can easily see how the above solution is always exponentially divergent in time.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   },
+   {
+    "sentence": "For instance, people who have never played the piano do not activate brain regions involved in playing the piano when listening to piano music.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Biological neuron model",
+  "revid": 1378207583,
+  "sentences": 321,
+  "flagged": [
+   {
+    "sentence": "Biological neuron models, also known as spiking neuron models, are mathematical descriptions of the conduction of electrical signals in neurons.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Although it is not unusual in science and engineering to have several descriptive models for different abstraction/detail levels, the number of different, sometimes contradicting, biological neuron models is exceptionally high.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Aims of neuron models Ultimately, biological neuron models aim to explain the mechanisms underlying the operation of the nervous system.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "This category includes (generalized) integrate-and-fire models and biophysical models inspired by the work of Hodgkin–Huxley in the early 1950s using an experimental setup that punctured the cell membrane and allowed to force a specific membrane voltage/current.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The model can be made more accurate by introducing a refractory period tref that limits the firing frequency of a neuron by preventing it from firing during that period.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "(The non-leaky integrate-and-fire model is retrieved in the limit Rm to infinity, i.e. if the membrane is a perfect insulator).",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   },
+   {
+    "sentence": "Moreover, adaptive integrate-and-fire neurons with several adaptation variables are able to predict spike times of cortical neurons under time-dependent current injection into the soma.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The relation of noise in neuron models to the variability of spike trains and neural codes is discussed in Neural Coding and in Chapter 7 of the textbook Neuronal Dynamics.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "At each moment in time t, a spike is generated stochastically with instantaneous stochastic intensity or 'escape rate'",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Spike firing is stochastic and happens with a time-dependent stochastic intensity (instantaneous rate)",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The estimation of parameters of probabilistic neuron models such as the SRM using methods developed for Generalized Linear Models is discussed in Chapter 10 of the textbook Neuronal Dynamics.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "With an appropriate choice of the kernels, the SRM0 approximates the dynamics of the Hodgkin-Huxley model to a high degree of accuracy.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "In 1981, Morris and Lecar combined the Hodgkin–Huxley and FitzHugh–Nagumo models into a voltage-gated calcium channel model with a delayed-rectifier potassium channel represented by",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "A two-dimensional neuron model very similar to the Morris-Lecar model can be derived step-by-step starting from the Hodgkin-Huxley model.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "For an external stimulus it can be estimated through the receptor layer model: y(t)≃ggain⋅⟨s2(t)⟩, with ⟨s2(t)⟩ being a short temporal average of stimulus power (given in Watt or other energy per time unit).",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "According to the model by Koch and Segev, the response of a neuron to individual neurotransmitters can be modeled as an extension of the classical Hodgkin–Huxley model with both standard and nonstandard kinetic currents.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Neural coding",
+  "revid": 1374681090,
+  "sentences": 218,
+  "flagged": [
+   {
+    "sentence": "In some neurons the strength with which a postsynaptic partner responds may depend solely on the 'firing rate', the average number of spikes per unit time (a 'rate code').",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Whether neurons use rate coding or temporal coding is a topic of intense debate within the neuroscience community, even though there is no clear definition of what these terms mean.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Under a rate coding assumption, any information possibly encoded in the temporal structure of the spike train is ignored.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Consequently, rate coding is inefficient but highly robust with respect to the ISI 'noise'.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "In fact, the term \"firing rate\" has a few different definitions, which refer to different averaging procedures, such as an average over time (rate as a single-neuron spike count) or an average over several repetitions (rate of PSTH) of experiment.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The spike-count rate can be determined from a single trial, but at the expense of losing all temporal resolution about variations in neural response during the course of the trial.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "If Δt is small, there will never be more than one spike within the interval between t and t+Δt on any given trial.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   },
+   {
+    "sentence": "Thus, the time-dependent firing rate coding relies on the implicit assumption that there are always populations of neurons.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   },
+   {
+    "sentence": "A number of studies have found that the temporal resolution of the neural code is on a millisecond time scale, indicating that precise spike timing is a significant element in neural coding.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Rate coding models suggest that these irregularities are noise, while temporal coding models suggest that they encode information.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Temporal coding allows the sequence 000111000111 to mean something different from 001100110011, even though the mean firing rate is the same for both sequences, at 6 spikes/10 ms.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Temporal codes (also called spike codes), employ those features of the spiking activity that cannot be described by the firing rate.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "For example, time-to-first-spike after the stimulus onset, phase-of-firing with respect to background oscillations, characteristics based on the second and higher statistical moments of the ISI probability distribution, spike randomness, or precisely timed groups of spikes (temporal patterns) are candidates for temporal codes.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The temporal structure of a spike train or firing rate evoked by a stimulus is determined both by the dynamics of the stimulus and by the nature of the neural encoding process.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The modifications can themselves depend not only on spike rates (rate coding) but also on spike timing patterns (temporal coding), i.e., can be a special case of spike-timing-dependent plasticity.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "The issue of temporal coding is distinct and independent from the issue of independent-spike coding.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "If each spike is independent of all the other spikes in the train, the temporal character of the neural code is determined by the behavior of time-dependent firing rate r(t).",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "If r(t) varies slowly with time, the code is typically called a rate code, and if it varies rapidly, the code is called temporal.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Due to the density of information about the abbreviated stimulus contained in this single spike, it would seem that the timing of the spike itself would have to convey more information than simply the average frequency of action potentials over a given period of time.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Additionally, if low firing rates on the order of ten spikes per second must be distinguished from arbitrarily close rate coding for different stimuli, then a neuron trying to discriminate these two stimuli may need to wait for a second or more to accumulate enough information.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "In this way, both rate coding and temporal coding may be used in the gustatory system – rate for basic tastant type, temporal for more specific differentiation.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Research on mammalian gustatory system has shown that there is an abundance of information present in temporal patterns across populations of neurons, and this information is different from that which is determined by rate coding schemes.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Researchers, through optogenetics, have the tools to effect different temporal codes in a neuron while maintaining the same mean firing rate, and thereby can test whether or not temporal coding occurs in specific neural circuits.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Phase-of-firing code is a neural coding scheme that combines the spike count code with a time reference based on oscillations.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Early work suggested that correlation between spike trains can only reduce, and never increase, the total mutual information present in the two spike trains about a stimulus feature.",
+    "types": [
+     "overclaim_absolute_language"
+    ],
+    "explanations": [
+     "Absolute language is a frequent source of hallucinated or over-generalized statements in AI research writing."
+    ]
+   },
+   {
+    "sentence": "However, the noise inherent in neural responses means that a maximum likelihood estimation function is more accurate.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   },
+   {
+    "sentence": "Other models are based on matching pursuit, a sparse approximation algorithm which finds the \"best matching\" projections of multidimensional data, and dictionary learning, a representation learning method which aims to find a sparse matrix representation of the input data in the form of a linear combination of basic elements as well as those basic elements themselves.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   }
+  ]
+ },
+ {
+  "title": "Cognitive computer",
+  "revid": 1384319408,
+  "sentences": 55,
+  "flagged": [
+   {
+    "sentence": "In theory, Loihi supports both machine learning training and inference on the same silicon independently of a cloud connection, and more efficiently than convolutional neural networks or deep learning neural networks.",
+    "types": [
+     "possible_common_mistake"
+    ],
+    "explanations": [
+     "This claim shares significant language with a known overstatement or misconception in neuromorphic research literature."
+    ]
+   }
+  ]
+ }
+]

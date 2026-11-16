@@ -4,7 +4,7 @@
   {
    "sentences": 10,
    "distinct_sentences": 10,
-   "median_ms": 1.0252000001855777,
+   "median_ms": 1.001399999950081,
    "peak_mib": 0.014153480529785156,
    "distinct_examined": 10,
    "gold_flag_recall": 0.8
@@ -12,7 +12,7 @@
   {
    "sentences": 100,
    "distinct_sentences": 100,
-   "median_ms": 1.332000000275002,
+   "median_ms": 1.2799999999515421,
    "peak_mib": 0.07116317749023438,
    "distinct_examined": 12,
    "gold_flag_recall": 0.12307692307692308
@@ -20,7 +20,7 @@
   {
    "sentences": 1000,
    "distinct_sentences": 140,
-   "median_ms": 3.1096000002435176,
+   "median_ms": 3.046299999823532,
    "peak_mib": 0.7364578247070312,
    "distinct_examined": 12,
    "gold_flag_recall": 0.11428571428571428
@@ -28,7 +28,7 @@
   {
    "sentences": 5000,
    "distinct_sentences": 140,
-   "median_ms": 10.846099999980652,
+   "median_ms": 10.775499999908789,
    "peak_mib": 3.7095680236816406,
    "distinct_examined": 12,
    "gold_flag_recall": 0.11428571428571428

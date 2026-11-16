@@ -27,8 +27,6 @@ class CheckerAgent(BaseAgent):
                 rule_facts = {e["id"] for i in found for e in i["evidence"]}
                 found += [i for i in self.nli.check(analysis, evidence)
                           if not rule_facts & {e["id"] for e in i["evidence"]}]
-            for i in found:
-                i["retrieved_evidence"] = [e["id"] for e in evidence]
             issues.extend(found)
 
         memory.potential_issues = issues
