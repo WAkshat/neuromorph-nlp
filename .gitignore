@@ -9,3 +9,5 @@ frontend/.next/
 frontend/out/
 frontend/build/
 frontend/*.tsbuildinfo
+benchmarks/results/*.tmp
+.pytest_cache/

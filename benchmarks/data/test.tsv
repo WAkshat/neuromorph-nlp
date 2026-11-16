@@ -1,0 +1,71 @@
+id	label	category	text
+t-o1	flag	overclaim	Spiking neural networks always outperform conventional deep networks on image classification benchmarks.
+t-o2	flag	overclaim	Our neuromorphic accelerator guarantees lower energy consumption than any GPU for every workload.
+t-o3	flag	overclaim	Event-driven processors consume zero energy whenever no spikes are present in the network.
+t-o4	flag	overclaim	Neuromorphic hardware will completely replace GPUs for training large deep learning models within a few years.
+t-o5	flag	overclaim	STDP is sufficient to solve all supervised learning problems without any labelled data or error signal.
+t-o6	flag	overclaim	ANN-to-SNN conversion never causes any loss of accuracy, regardless of the number of timesteps used.
+t-o7	flag	overclaim	Spiking networks are universally more energy efficient than artificial neural networks on all hardware platforms.
+t-o8	flag	overclaim	Temporal coding is perfectly robust to noise and never requires more than a single spike per neuron.
+t-o9	flag	overclaim	Leaky integrate-and-fire neurons are a fully biologically realistic model of cortical pyramidal cells.
+t-o10	flag	overclaim	Memristive synapses have unlimited endurance and store analog weights with perfect precision.
+t-o11	flag	overclaim	Surrogate gradient training is guaranteed to converge to the global optimum for any spiking architecture.
+t-o12	flag	overclaim	Every neuromorphic chip available today supports online learning directly on the device.
+t-f1	flag	factual_error	IBM TrueNorth provides rich programmable on-chip learning through spike-timing-dependent plasticity.
+t-f2	flag	factual_error	Intel's TrueNorth processor was introduced in 2014 with one million digital neurons.
+t-f3	flag	factual_error	The Loihi research chip was designed by IBM and fabricated in a 14 nm process.
+t-f4	flag	factual_error	TrueNorth integrates roughly one billion neurons and 256 billion synapses on a single chip.
+t-f5	flag	factual_error	SpiNNaker is an analog mixed-signal system built at Heidelberg University.
+t-f6	flag	factual_error	BrainScaleS is a fully digital platform that runs strictly in biological real time.
+t-f7	flag	factual_error	The first Loihi chip contains approximately 130 million neurons across its neuromorphic cores.
+t-f8	flag	factual_error	The spike function is smooth and differentiable, so standard backpropagation applies to SNNs without modification.
+t-f9	flag	factual_error	In rate coding, information is carried exclusively by the precise timing of individual spikes.
+t-f10	flag	factual_error	STDP is a global supervised learning rule that requires backpropagating errors through the entire network.
+t-f11	flag	factual_error	In classical STDP, a presynaptic spike arriving shortly before a postsynaptic spike weakens the synapse.
+t-f12	flag	factual_error	The Hodgkin-Huxley model is simpler and computationally cheaper than the leaky integrate-and-fire model.
+t-f13	flag	factual_error	Dynamic vision sensors output full image frames at a fixed rate just like conventional cameras.
+t-f14	flag	factual_error	The term neuromorphic engineering was coined by Geoffrey Hinton in the early 2010s.
+t-p1	flag	paraphrased_myth	There is no longer any reason to use graphics processors now that neuromorphic chips exist.
+t-p2	flag	paraphrased_myth	Idle neuromorphic circuits draw no power at all, since nothing happens between spikes.
+t-p3	flag	paraphrased_myth	Whatever the benchmark, a spiking model will be the more accurate choice compared with an ANN.
+t-p4	flag	paraphrased_myth	Both TrueNorth and Loihi let you train synaptic weights directly on the chip using local plasticity.
+t-p5	flag	paraphrased_myth	Modern SNN simulations faithfully reproduce the full biophysics of real neurons in the brain.
+t-p6	flag	paraphrased_myth	Rate coding and temporal coding are two names for exactly the same spike encoding scheme.
+t-p7	flag	paraphrased_myth	Online learning on the device is a standard feature across the whole range of neuromorphic processors.
+t-p8	flag	paraphrased_myth	Switching any model from a GPU to a neuromorphic chip cuts its energy use by orders of magnitude.
+t-p9	flag	paraphrased_myth	Training spiking networks directly is cheap and needs far less computation than training an equivalent ANN.
+t-c1	ok	correct_fact	IBM TrueNorth contains one million neurons and 256 million configurable synapses.
+t-c2	ok	correct_fact	Intel introduced the Loihi chip in 2018 with support for programmable on-chip learning rules.
+t-c3	ok	correct_fact	SpiNNaker is a digital neuromorphic platform from the University of Manchester built from ARM cores.
+t-c4	ok	correct_fact	BrainScaleS is a mixed-signal system from Heidelberg that emulates neural dynamics faster than biological real time.
+t-c5	ok	correct_fact	Surrogate gradient methods replace the derivative of the spike function with a smooth approximation during training.
+t-c6	ok	correct_fact	In spike-timing-dependent plasticity, the sign of the weight change depends on the relative timing of pre- and postsynaptic spikes.
+t-c7	ok	correct_fact	The leaky integrate-and-fire neuron integrates input current and emits a spike when its membrane potential crosses a threshold.
+t-c8	ok	correct_fact	Event cameras report per-pixel brightness changes asynchronously instead of capturing full frames.
+t-c9	ok	correct_fact	Carver Mead introduced the term neuromorphic in the late 1980s to describe analog circuits that mimic neural systems.
+t-c10	ok	correct_fact	Loihi 2 supports graded spikes and programmable neuron models, and is programmed through the open-source Lava framework.
+t-c11	ok	correct_fact	Rate coding represents information in the average firing rate of a neuron over a time window.
+t-c12	ok	correct_fact	Memristors are two-terminal devices whose resistance depends on the history of the current that has passed through them.
+t-n1	ok	correct_negation	SNNs are not always more accurate than ANNs, and often trail them on static image benchmarks.
+t-n2	ok	correct_negation	TrueNorth does not support on-chip learning; its weights are trained offline and then deployed.
+t-n3	ok	correct_negation	Neuromorphic chips are not a general replacement for GPUs, which remain better suited to dense matrix workloads.
+t-n4	ok	correct_negation	It is a myth that idle neuromorphic hardware uses zero energy, because static leakage and clocking overheads remain.
+t-n5	ok	correct_negation	Unlike Loihi, TrueNorth offers no programmable synaptic plasticity on the chip itself.
+t-n6	ok	correct_negation	Energy savings from spiking hardware are not guaranteed and depend strongly on the sparsity of activity.
+t-n7	ok	correct_negation	The spike nonlinearity is not differentiable, which is why surrogate gradients are needed for backpropagation.
+t-n8	ok	correct_negation	Few practical SNNs use Hodgkin-Huxley dynamics; most rely on simplified models that are far from biologically complete.
+t-n9	ok	correct_negation	Not every neuromorphic platform supports online learning, so this capability must be checked per device.
+t-n10	ok	correct_negation	Conversion from ANNs to SNNs rarely comes for free, since short simulation windows usually cost some accuracy.
+t-h1	ok	hedged	For sparse, event-driven workloads, neuromorphic processors can be substantially more energy efficient than GPUs.
+t-h2	ok	hedged	On some neuromorphic datasets such as DVS Gesture, directly trained SNNs reach accuracy comparable to ANNs.
+t-h3	ok	hedged	Spiking networks may offer latency advantages when inputs arrive as asynchronous event streams.
+t-h4	ok	hedged	In certain keyword-spotting tasks, Loihi has been reported to use considerably less energy per inference than a GPU.
+t-h5	ok	hedged	STDP can learn useful features without labels, although it typically underperforms supervised training on complex tasks.
+t-h6	ok	hedged	Temporal coding can in principle transmit information with fewer spikes than rate coding.
+t-h7	ok	hedged	Memristive crossbars could reduce the cost of synaptic operations, but device variability remains a challenge.
+t-h8	ok	hedged	Under low activity, event-driven designs tend to consume less dynamic power than clocked accelerators.
+t-u1	ok	neutral	This section reviews the main families of neuromorphic hardware and the software tools used to program them.
+t-u2	ok	neutral	We evaluate our model on three event-based datasets and report accuracy together with average spike counts.
+t-u3	ok	neutral	The remainder of the paper is organised as follows, beginning with background on spiking neuron models.
+t-u4	ok	neutral	Neuromorphic computing draws inspiration from the structure and dynamics of biological nervous systems.
+t-u5	ok	neutral	Several research groups have released open-source simulators for spiking neural networks in recent years.
