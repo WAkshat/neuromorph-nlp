@@ -1,6 +1,21 @@
-"""Synthesizer Agent – Produces the final human-readable report."""
+"""Synthesizer - turns the findings into the final report."""
 
-from .base import BaseAgent, AgentRole, AgentMessage, SharedMemory
+from .base import AgentMessage, AgentRole, BaseAgent, SharedMemory
+
+RECOMMENDATIONS = {
+    "overclaim_absolute_language":
+        "Replace absolute language (always / never / guarantees / all cases) with the conditions under which the claim holds.",
+    "contradicts_knowledge_base":
+        "Correct the statements that contradict documented facts; each finding cites its source.",
+    "numeric_mismatch":
+        "Re-check the reported neuron / synapse / core counts against the original chip papers.",
+    "misattribution":
+        "Fix the attribution of chips and terms to the right organisation or author.",
+    "nli_contradiction":
+        "Review the claims an NLI model judged to contradict the knowledge base (model-based, verify manually).",
+    "possible_common_mistake":
+        "Rephrase claims that restate a known misconception about neuromorphic computing.",
+}
 
 
 class SynthesizerAgent(BaseAgent):
@@ -8,77 +23,43 @@ class SynthesizerAgent(BaseAgent):
 
     def run(self, memory: SharedMemory) -> AgentMessage:
         issues = memory.potential_issues
-        claims = memory.extracted_claims
-        knowledge_count = len(memory.retrieved_knowledge)
+        high = sum(1 for i in issues if i["severity"] == "high")
+        medium = sum(1 for i in issues if i["severity"] == "medium")
+        flagged = {i["claim_index"] for i in issues}
+        n_claims = len(memory.extracted_claims)
 
-        thought_parts = [
-            "I am synthesizing the full multi-agent trace into a clear, actionable report "
-            "that highlights where hallucination risk is highest."
-        ]
+        if issues:
+            assessment = (f"{len(flagged)} of {n_claims} claims were flagged "
+                          f"({len(issues)} findings: {high} high, {medium} medium severity).")
+            recommendations = [text for type_, text in RECOMMENDATIONS.items()
+                               if any(i["type"] == type_ for i in issues)]
+        else:
+            assessment = (f"None of the {n_claims} claims were flagged. No overclaim wording and no "
+                          "contradiction with the built-in knowledge base was detected; this does not "
+                          "mean the document is correct.")
+            recommendations = ["Have a domain expert verify quantitative results and claims outside the knowledge base."]
 
-        # Build structured report
-        high = [i for i in issues if i["severity"] == "high"]
-        medium = [i for i in issues if i["severity"] == "medium"]
-
-        summary = {
-            "overall_assessment": "",
-            "claim_count": len(claims),
+        memory.final_report = {
+            "overall_assessment": assessment,
+            "claim_count": n_claims,
+            "claims_flagged": len(flagged),
             "issues_found": len(issues),
-            "high_severity": len(high),
-            "medium_severity": len(medium),
-            "knowledge_items_used": knowledge_count,
-            "recommendations": [],
+            "high_severity": high,
+            "medium_severity": medium,
+            "knowledge_items_used": len(memory.retrieved_knowledge),
+            "recommendations": recommendations,
             "detailed_issues": issues,
+            "claim_verdicts": [
+                {"claim_index": a.index,
+                 "verdict": "flagged" if a.index in flagged else "no_issue_found",
+                 "evidence_ids": [e["id"] for e in ev]}
+                for a, ev in zip(memory.analyses, memory.evidence)
+            ],
             "agent_collaboration_note": (
-                "This report was produced by a sequential multi-agent pipeline: "
-                "Viewer → Thinker → Recall → Checker → Synthesizer. "
-                "Each agent externalizes its reasoning (see / think / recall) to reduce silent hallucination."
+                "Sequential pipeline with a shared blackboard: Viewer (segmentation) -> Thinker (negation and "
+                "absolute-language analysis) -> Recall (BM25 evidence) -> Checker (verifiers) -> Synthesizer."
             ),
         }
-
-        if not issues:
-            summary["overall_assessment"] = (
-                "No strong hallucination or factual red flags were detected against the "
-                "curated neuromorphic knowledge base. The document appears relatively careful, "
-                "but this is not a guarantee of correctness — always verify critical claims with primary literature."
-            )
-            summary["recommendations"] = [
-                "Have a domain expert review any quantitative performance numbers.",
-                "Cite original papers for hardware capability claims (Loihi, TrueNorth, BrainScaleS, etc.).",
-            ]
-        else:
-            summary["overall_assessment"] = (
-                f"Found {len(issues)} potential issues ({len(high)} high severity). "
-                "Several statements show patterns commonly associated with overclaiming "
-                "or inaccurate understanding of neuromorphic hardware and algorithms."
-            )
-            summary["recommendations"] = [
-                "Revise absolute language (always/never/guarantees) into conditional statements.",
-                "Double-check hardware features against official Intel Loihi / IBM TrueNorth documentation.",
-                "Distinguish clearly between rate coding and temporal coding when discussing SNNs.",
-                "Avoid claiming that neuromorphic systems universally replace GPUs.",
-                "Add citations for any energy-efficiency or accuracy numbers.",
-            ]
-
-        memory.final_report = summary
-
-        thought_parts.append(
-            f"Final report ready. Assessment: {summary['overall_assessment'][:100]}..."
-        )
-        thought = " | ".join(thought_parts)
-
-        content = (
-            f"Synthesis complete. Overall: {summary['overall_assessment']}"
-        )
-
-        msg = AgentMessage(
-            role=self.role,
-            content=content,
-            thought=self._log_thought(thought),
-            confidence=0.9,
-            metadata={
-                "report_keys": list(summary.keys()),
-            },
-        )
-        memory.add_trace(msg)
-        return msg
+        return self._emit(memory, f"Synthesis complete. {assessment}",
+                          "Recommendations are derived from the issue types actually found.",
+                          report_keys=list(memory.final_report))

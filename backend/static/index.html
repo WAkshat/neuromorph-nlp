@@ -110,7 +110,7 @@
       <div class="card">
         <label>📄 Upload Research Document (.txt / .pdf / .docx)</label>
         <div class="drop" id="dropzone">
-          <input type="file" id="file" accept=".txt,.pdf,.docx,.doc" hidden />
+          <input type="file" id="file" accept=".txt,.pdf,.docx" hidden />
           <div id="drop-label">Click or drop a file here</div>
         </div>
       </div>
@@ -205,6 +205,8 @@
         btn.disabled = false; btn.textContent = 'Run Multi-Agent Review';
       }
     }
+    // Everything below comes from the reviewed document or the server: escape before innerHTML.
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     function render(r) {
       document.getElementById('howto').classList.add('hidden');
       document.getElementById('results').classList.remove('hidden');
@@ -215,29 +217,30 @@
         <div class="stat"><div class="label">High severity</div><div class="val" style="color:${(fr.high_severity||0)>0?'var(--rose)':'var(--emerald)'}">${fr.high_severity||0}</div></div>
         <div class="stat"><div class="label">Knowledge used</div><div class="val" style="color:#a78bfa">${fr.knowledge_items_used||0}</div></div>`;
       document.getElementById('assessment').innerHTML =
-        '<div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.35rem;">Overall Assessment</div><div>' + (fr.overall_assessment || '') + '</div>';
+        '<div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.35rem;">Overall Assessment</div><div>' + esc(fr.overall_assessment) + '</div>';
       const icons = {viewer:'👁️',thinker:'🧠',recall:'📚',checker:'🔍',synthesizer:'✨'};
       document.getElementById('panel-trace').innerHTML = (r.agent_trace||[]).map(m => `
-        <div class="agent"><div class="agent-head ${m.role}">
-          <span>${icons[m.role]||'🤖'} ${m.role.charAt(0).toUpperCase()+m.role.slice(1)} Agent</span>
-          <span style="font-size:0.7rem;background:rgba(0,0,0,0.25);padding:0.15rem 0.5rem;border-radius:999px;">Confidence ${Math.round((m.confidence||0)*100)}%</span>
-        </div><div class="agent-body"><div>${m.content||''}</div>
-        ${m.thought ? `<div class="thought"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem;color:#6b7280;">Internal reasoning (anti-hallucination)</div>${m.thought}</div>` : ''}
+        <div class="agent"><div class="agent-head ${esc(m.role)}">
+          <span>${icons[m.role]||'🤖'} ${esc(m.role.charAt(0).toUpperCase()+m.role.slice(1))} Agent</span>
+          ${typeof m.confidence === 'number' ? `<span style="font-size:0.7rem;background:rgba(0,0,0,0.25);padding:0.15rem 0.5rem;border-radius:999px;">Confidence ${Math.round(m.confidence*100)}%</span>` : ''}
+        </div><div class="agent-body"><div>${esc(m.content)}</div>
+        ${m.thought ? `<div class="thought"><div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.35rem;color:#6b7280;">Reasoning</div>${esc(m.thought)}</div>` : ''}
         </div></div>`).join('');
       const issues = (fr.detailed_issues||[]).map(i => `
-        <div class="issue ${i.severity}"><div style="margin-bottom:0.4rem;">
-          <span class="badge ${i.severity}">${i.severity}</span>
-          <span style="font-size:0.7rem;color:var(--muted);margin-left:0.4rem;">${i.type}</span></div>
-          <div style="font-style:italic;font-size:0.9rem;margin-bottom:0.4rem;">“${i.claim}”</div>
-          <div style="font-size:0.85rem;color:#d1d5db;">${i.explanation}</div>
-          <div style="font-size:0.8rem;color:var(--cyan);margin-top:0.35rem;">💡 ${i.suggestion}</div></div>`).join('')
-        || '<p style="color:var(--emerald);font-size:0.9rem;">No strong red flags detected against the knowledge base.</p>';
-      const recs = (fr.recommendations||[]).map(x => `<li style="margin:0.25rem 0;color:#9ca3af;font-size:0.85rem;">→ ${x}</li>`).join('');
+        <div class="issue ${esc(i.severity)}"><div style="margin-bottom:0.4rem;">
+          <span class="badge ${esc(i.severity)}">${esc(i.severity)}</span>
+          <span style="font-size:0.7rem;color:var(--muted);margin-left:0.4rem;">${esc(i.type)}</span></div>
+          <div style="font-style:italic;font-size:0.9rem;margin-bottom:0.4rem;">“${esc(i.claim)}”</div>
+          <div style="font-size:0.85rem;color:#d1d5db;">${esc(i.explanation)}</div>
+          ${(i.evidence||[]).map(e => `<div style="font-size:0.78rem;color:#9ca3af;margin-top:0.35rem;">📚 ${esc(e.content)} <span style="color:#6b7280;">[${esc(e.citation)}]</span></div>`).join('')}
+          <div style="font-size:0.8rem;color:var(--cyan);margin-top:0.35rem;">💡 ${esc(i.suggestion)}</div></div>`).join('')
+        || '<p style="color:var(--emerald);font-size:0.9rem;">No issues flagged. This does not mean the document is correct.</p>';
+      const recs = (fr.recommendations||[]).map(x => `<li style="margin:0.25rem 0;color:#9ca3af;font-size:0.85rem;">→ ${esc(x)}</li>`).join('');
       document.getElementById('panel-report').innerHTML = issues +
         (recs ? `<h3 style="font-size:0.9rem;margin:1.25rem 0 0.5rem;">Recommendations</h3><ul style="padding-left:0;list-style:none;">${recs}</ul>` : '') +
-        `<p style="font-size:0.7rem;color:#4b5563;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.75rem;">${fr.agent_collaboration_note||''}</p>`;
+        `<p style="font-size:0.7rem;color:#4b5563;margin-top:1rem;border-top:1px solid var(--border);padding-top:0.75rem;">${esc(fr.agent_collaboration_note)}</p>`;
       document.getElementById('panel-claims').innerHTML = (r.extracted_claims||[]).length
-        ? r.extracted_claims.map((c,i) => `<div class="card" style="margin-bottom:0.5rem;font-size:0.85rem;"><span style="color:#6b7280;">#${i+1}</span> ${c}</div>`).join('')
+        ? r.extracted_claims.map((c,i) => `<div class="card" style="margin-bottom:0.5rem;font-size:0.85rem;"><span style="color:#6b7280;">#${i+1}</span> ${esc(c)}</div>`).join('')
         : '<p style="color:var(--muted);font-size:0.9rem;">No claims extracted.</p>';
       showTab('trace');
     }

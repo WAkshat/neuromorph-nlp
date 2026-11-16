@@ -1,57 +1,55 @@
-"""
-Neuromorphic AI Multi-Agent Document Reviewer
-Backend: FastAPI
-"""
+"""Neuromorphic-claims document reviewer: FastAPI backend."""
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
-import shutil
+import logging
+import os
 from pathlib import Path
-import uuid
 
-from agents.orchestrator import MultiAgentOrchestrator
-from services.document_processor import extract_text_from_file
+from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from pydantic import BaseModel, Field
 
-BASE_DIR = Path(__file__).parent
-STATIC_DIR = BASE_DIR / "static"
-UPLOAD_DIR = BASE_DIR / "uploads"
-UPLOAD_DIR.mkdir(exist_ok=True)
-STATIC_DIR.mkdir(exist_ok=True)
+from agents.orchestrator import DocumentTooShort, MultiAgentOrchestrator, PipelineConfig
+from services.document_processor import SUPPORTED_SUFFIXES, ExtractionError, extract_text
+
+STATIC_DIR = Path(__file__).parent / "static"
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024
+MAX_TEXT_CHARS = 2_000_000
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+log = logging.getLogger("reviewer")
 
 app = FastAPI(
-    title="Neuromorphic AI Multi-Agent Reviewer",
-    description=(
-        "Multi-agent system that sees, thinks, recalls, and checks research documents "
-        "to reduce hallucination and factual mistakes in neuromorphic AI writing."
-    ),
-    version="1.0.0",
+    title="Neuromorphic Claims Reviewer",
+    description="Flags overclaims and statements that contradict a curated neuromorphic-computing knowledge base.",
+    version="2.0.0",
 )
 
-# Allow local frontends
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# The API holds no credentials or sessions, so any origin may call it (local frontends).
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-orchestrator = MultiAgentOrchestrator()
+# REVIEWER_NLI=1 enables the optional NLI verifier (needs torch + transformers, downloads a model).
+orchestrator = MultiAgentOrchestrator(PipelineConfig(nli=os.environ.get("REVIEWER_NLI") == "1"))
+
+
+class TextPayload(BaseModel):
+    text: str = Field(max_length=MAX_TEXT_CHARS)
+
+
+def _review(text: str) -> dict:
+    try:
+        result = orchestrator.process_document(text)
+    except DocumentTooShort as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    report = result["final_report"]
+    log.info("reviewed document=%s claims=%d flagged=%d issues=%d", result["document_id"],
+             report["claim_count"], report["claims_flagged"], report["issues_found"])
+    return result
 
 
 @app.get("/")
 def root():
-    index = STATIC_DIR / "index.html"
-    if index.exists():
-        return FileResponse(index)
-    return {
-        "status": "ok",
-        "service": "Neuromorphic AI Multi-Agent Reviewer",
-        "agents": ["Viewer", "Thinker", "Recall", "Checker", "Synthesizer"],
-        "message": "Open / for the UI, or POST to /api/review",
-    }
+    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/api/health")
@@ -59,69 +57,31 @@ def health():
     return {"status": "healthy"}
 
 
+# Plain `def` endpoints: FastAPI runs them in a worker thread, so a long document
+# does not block the event loop for other requests.
 @app.post("/api/review")
-async def review_document(file: UploadFile = File(...)):
-    """
-    Upload a research document (txt, pdf, docx).
-    The multi-agent pipeline will:
-      1. Viewer   see & extract claims
-      2. Thinker   reason about risks
-      3. Recall    ground with knowledge base
-      4. Checker   detect hallucination / mistakes
-      5. Synthesizer  produce final report
-    """
-    allowed = {".txt", ".pdf", ".docx", ".doc"}
+def review_document(file: UploadFile = File(...)):
+    """Upload a .txt / .pdf / .docx document for review. Nothing is written to disk."""
     suffix = Path(file.filename or "").suffix.lower()
-    if suffix not in allowed:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Unsupported file type. Allowed: {', '.join(allowed)}",
-        )
-
-    # Save upload
-    file_id = str(uuid.uuid4())
-    save_path = UPLOAD_DIR / f"{file_id}{suffix}"
+    if suffix not in SUPPORTED_SUFFIXES:
+        raise HTTPException(status_code=400, detail=f"Unsupported file type. Allowed: {', '.join(SUPPORTED_SUFFIXES)}")
+    data = file.file.read(MAX_UPLOAD_BYTES + 1)
+    if len(data) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail=f"File larger than {MAX_UPLOAD_BYTES // 2**20} MB.")
     try:
-        with open(save_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to save file: {e}")
-
-    # Extract text
-    try:
-        text = extract_text_from_file(str(save_path), file.content_type)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Text extraction failed: {e}")
-
-    if not text or len(text.strip()) < 30:
-        raise HTTPException(
-            status_code=400,
-            detail="Could not extract meaningful text from the document.",
-        )
-
-    # Run multi-agent pipeline
-    try:
-        result = orchestrator.process_document(text)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Agent pipeline error: {e}")
-
-    return JSONResponse(content={
-        "filename": file.filename,
-        "document_id": result.get("document_id"),
-        "result": result,
-    })
+        text = extract_text(data, file.filename)
+    except ExtractionError as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    result = _review(text)
+    return {"filename": file.filename, "document_id": result["document_id"], "result": result}
 
 
 @app.post("/api/review-text")
-async def review_text(payload: dict):
-    """Alternative endpoint: send plain text directly (no file)."""
-    text = payload.get("text", "").strip()
-    if len(text) < 20:
-        raise HTTPException(status_code=400, detail="Text too short. Paste at least a couple of sentences.")
-    result = orchestrator.process_document(text)
-    return {"result": result}
+def review_text(payload: TextPayload):
+    """Review plain text sent as JSON: {"text": "..."}."""
+    return {"result": _review(payload.text)}
 
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

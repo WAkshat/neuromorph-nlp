@@ -6,7 +6,7 @@ type AgentMessage = {
   role: string;
   content: string;
   thought: string;
-  confidence: number;
+  confidence: number | null;
   timestamp: string;
   metadata?: Record<string, any>;
 };
@@ -167,7 +167,7 @@ export default function Home() {
               <input
                 ref={fileInputRef}
                 type="file"
-                accept=".txt,.pdf,.docx,.doc"
+                accept=".txt,.pdf,.docx"
                 className="hidden"
                 onChange={handleFileChange}
               />
@@ -278,9 +278,11 @@ export default function Home() {
                         <span>{AGENT_ICONS[msg.role] || "🤖"}</span>
                         <span className="capitalize">{msg.role} Agent</span>
                       </div>
-                      <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
-                        Confidence {(msg.confidence * 100).toFixed(0)}%
-                      </span>
+                      {typeof msg.confidence === "number" && (
+                        <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
+                          Confidence {(msg.confidence * 100).toFixed(0)}%
+                        </span>
+                      )}
                     </div>
                     <div className="p-4 space-y-3">
                       <p className="text-slate-200">{msg.content}</p>

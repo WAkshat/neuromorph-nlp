@@ -1,59 +1,33 @@
-"""Recall Agent – Retrieves grounded knowledge to combat hallucination."""
+"""Recall - retrieves knowledge-base evidence for every claim (BM25)."""
 
-from .base import BaseAgent, AgentRole, AgentMessage, SharedMemory
-from knowledge.neuromorphic_kb import search_knowledge, get_all_mistakes
+from knowledge.neuromorphic_kb import search_knowledge
+
+from .base import AgentMessage, AgentRole, BaseAgent, SharedMemory
 
 
 class RecallAgent(BaseAgent):
     role = AgentRole.RECALL
 
+    def __init__(self, top_k: int = 3):
+        self.top_k = top_k
+
     def run(self, memory: SharedMemory) -> AgentMessage:
-        claims = memory.extracted_claims
-        thought_parts = []
-        all_retrieved = []
+        memory.evidence = [search_knowledge(a.text, self.top_k) for a in memory.analyses]
+        union: dict[str, dict] = {}
+        for hits in memory.evidence:
+            for h in hits:
+                if h["id"] not in union or h["score"] > union[h["id"]]["score"]:
+                    union[h["id"]] = h
+        memory.retrieved_knowledge = sorted(union.values(), key=lambda h: -h["score"])
 
-        thought_parts.append(
-            "I am recalling grounded knowledge from the neuromorphic knowledge base "
-            "to provide factual anchors for the Checker."
+        with_evidence = sum(1 for hits in memory.evidence if hits)
+        return self._emit(
+            memory,
+            f"Retrieved evidence for {with_evidence} of {len(memory.evidence)} claims "
+            f"({len(memory.retrieved_knowledge)} distinct knowledge-base facts).",
+            f"BM25 retrieval, top {self.top_k} facts per claim. Claims with no lexical overlap "
+            "with the knowledge base get no evidence and cannot be fact-checked.",
+            retrieved_count=len(memory.retrieved_knowledge),
+            claims_with_evidence=with_evidence,
+            knowledge_preview=[h["id"] for h in memory.retrieved_knowledge[:5]],
         )
-
-        # Search for each claim (or top ones)
-        for claim in claims[:8]:
-            results = search_knowledge(claim, top_k=3)
-            for r in results:
-                if r not in all_retrieved:
-                    all_retrieved.append(r)
-
-        # Also always pull the common mistakes list for the checker
-        mistakes = get_all_mistakes()
-        thought_parts.append(
-            f"Retrieved {len(all_retrieved)} knowledge snippets + {len(mistakes)} known common mistakes/myths."
-        )
-
-        if all_retrieved:
-            thought_parts.append(
-                "Sample grounding: " + all_retrieved[0]["content"][:100] + "..."
-            )
-
-        memory.retrieved_knowledge = all_retrieved
-
-        thought = " | ".join(thought_parts)
-
-        content = (
-            f"Recall complete. Provided {len(all_retrieved)} grounded knowledge items "
-            f"and the curated list of common neuromorphic misconceptions for the Checker agent."
-        )
-
-        msg = AgentMessage(
-            role=self.role,
-            content=content,
-            thought=self._log_thought(thought),
-            confidence=0.92,
-            metadata={
-                "retrieved_count": len(all_retrieved),
-                "knowledge_preview": [r["source"] for r in all_retrieved[:5]],
-                "common_mistakes_count": len(mistakes),
-            },
-        )
-        memory.add_trace(msg)
-        return msg

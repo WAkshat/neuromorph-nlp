@@ -1,139 +1,47 @@
-"""Checker Agent – Detects potential hallucinations, factual errors, and overclaims."""
+"""Checker - runs the enabled verifiers over every analysed claim."""
 
-from .base import BaseAgent, AgentRole, AgentMessage, SharedMemory
-from knowledge.neuromorphic_kb import get_all_mistakes
-import re
+from collections import Counter
+
+from .base import AgentMessage, AgentRole, BaseAgent, SharedMemory
+from .verifiers import check_constraints, check_overclaim
+
+RULE_VERIFIERS = {"overclaim": check_overclaim, "constraints": check_constraints}
 
 
 class CheckerAgent(BaseAgent):
     role = AgentRole.CHECKER
 
+    def __init__(self, verifiers: tuple[str, ...] = ("overclaim", "constraints"), nli=None):
+        unknown = set(verifiers) - set(RULE_VERIFIERS)
+        if unknown:
+            raise ValueError(f"unknown verifiers {sorted(unknown)}; choose from {sorted(RULE_VERIFIERS)}")
+        self.verifiers = tuple(verifiers)
+        self.nli = nli      # an agents.verifiers.NLIVerifier, or None
+
     def run(self, memory: SharedMemory) -> AgentMessage:
-        claims = memory.extracted_claims
-        knowledge = memory.retrieved_knowledge
-        known_mistakes = get_all_mistakes()
         issues = []
+        for analysis, evidence in zip(memory.analyses, memory.evidence):
+            found = [i for name in self.verifiers for i in RULE_VERIFIERS[name](analysis)]
+            if self.nli is not None:
+                # NLI only adds findings the rules did not already make from the same fact.
+                rule_facts = {e["id"] for i in found for e in i["evidence"]}
+                found += [i for i in self.nli.check(analysis, evidence)
+                          if not rule_facts & {e["id"] for e in i["evidence"]}]
+            for i in found:
+                i["retrieved_evidence"] = [e["id"] for e in evidence]
+            issues.extend(found)
 
-        thought_parts = [
-            "I am cross-checking every extracted claim against recalled knowledge "
-            "and the curated list of common neuromorphic myths to prevent hallucination."
-        ]
-
-        # 1. Direct match against known common mistakes
-        for claim in claims:
-            claim_lower = claim.lower()
-            for mistake in known_mistakes:
-                # Simple overlap check
-                mistake_keywords = set(re.findall(r'\b\w{4,}\b', mistake.lower()))
-                claim_keywords = set(re.findall(r'\b\w{4,}\b', claim_lower))
-                overlap = mistake_keywords & claim_keywords
-                if len(overlap) >= 3:
-                    issues.append({
-                        "type": "possible_common_mistake",
-                        "severity": "high",
-                        "claim": claim,
-                        "matched_myth": mistake,
-                        "explanation": (
-                            "This claim shares significant language with a known overstatement "
-                            "or misconception in neuromorphic research literature."
-                        ),
-                        "suggestion": "Verify against primary sources (Loihi papers, TrueNorth papers, recent SNN surveys)."
-                    })
-
-        # 2. Absolute language detector
-        absolute_patterns = [
-            r"\balways\b", r"\bnever\b", r"\bguarantees?\b", r"\bperfect\b",
-            r"\bzero energy\b", r"\breplaces? (all )?gpus?\b", r"\bfully biological\b",
-            r"\borders of magnitude (better|more efficient) in all\b"
-        ]
-        for claim in claims:
-            for pat in absolute_patterns:
-                if re.search(pat, claim, re.IGNORECASE):
-                    issues.append({
-                        "type": "overclaim_absolute_language",
-                        "severity": "medium",
-                        "claim": claim,
-                        "matched_myth": None,
-                        "explanation": (
-                            "Absolute language is a frequent source of hallucinated or "
-                            "over-generalized statements in AI research writing."
-                        ),
-                        "suggestion": "Qualify the statement with conditions, benchmarks, or 'under certain workloads'."
-                    })
-                    break
-
-        # 3. Hardware capability sanity checks
-        hardware_rules = [
-            {
-                "if_contains": ["truenorth", "learning"],
-                "flag_if_not": ["limited", "not", "does not", "no on-chip"],
-                "msg": "TrueNorth has very limited / no flexible on-chip learning compared to Loihi. Claims of rich on-chip learning on TrueNorth are often incorrect."
-            },
-            {
-                "if_contains": ["snn", "always", "more accurate"],
-                "flag_if_not": [],
-                "msg": "SNNs do not always outperform ANNs on accuracy; they often trade accuracy for efficiency or temporal processing advantages."
-            },
-            {
-                "if_contains": ["neuromorphic", "replace", "gpu"],
-                "flag_if_not": ["sparse", "event-driven", "certain workloads"],
-                "msg": "Neuromorphic hardware does not generally replace GPUs; it is complementary for sparse, low-power, event-driven tasks."
-            },
-        ]
-
-        for claim in claims:
-            claim_lower = claim.lower()
-            for rule in hardware_rules:
-                if all(term in claim_lower for term in rule["if_contains"]):
-                    if not any(safe in claim_lower for safe in rule["flag_if_not"]):
-                        issues.append({
-                            "type": "hardware_capability_risk",
-                            "severity": "high",
-                            "claim": claim,
-                            "matched_myth": None,
-                            "explanation": rule["msg"],
-                            "suggestion": "Cross-check against the original chip papers and recent surveys."
-                        })
-
-        # Deduplicate roughly
-        unique_issues = []
-        seen = set()
-        for iss in issues:
-            key = (iss["type"], iss["claim"][:80])
-            if key not in seen:
-                seen.add(key)
-                unique_issues.append(iss)
-
-        memory.potential_issues = unique_issues
-
-        thought_parts.append(
-            f"Found {len(unique_issues)} potential issues (hallucination risks, overclaims, or factual red flags)."
+        memory.potential_issues = issues
+        by_type = Counter(i["type"] for i in issues)
+        active = list(self.verifiers) + (["nli"] if self.nli is not None else [])
+        return self._emit(
+            memory,
+            f"Found {len(issues)} potential issues in {len({i['claim_index'] for i in issues})} claims.",
+            f"Verifiers run: {', '.join(active) or 'none'}. By type: {dict(by_type) or 'nothing flagged'}. "
+            "A claim with no finding is not thereby verified: only contradictions the knowledge base "
+            "can express are detectable.",
+            issue_count=len(issues),
+            high_severity=sum(1 for i in issues if i["severity"] == "high"),
+            issues_by_type=dict(by_type),
+            verifiers=active,
         )
-        if unique_issues:
-            thought_parts.append(
-                "Highest severity example: " + unique_issues[0]["explanation"][:120]
-            )
-        else:
-            thought_parts.append(
-                "No strong red flags detected against the knowledge base. Still recommend human expert review."
-            )
-
-        thought = " | ".join(thought_parts)
-
-        content = (
-            f"Checking complete. Identified {len(unique_issues)} potential mistakes or "
-            f"hallucination risks. Detailed findings passed to the Synthesizer."
-        )
-
-        msg = AgentMessage(
-            role=self.role,
-            content=content,
-            thought=self._log_thought(thought),
-            confidence=0.85,
-            metadata={
-                "issue_count": len(unique_issues),
-                "high_severity": sum(1 for i in unique_issues if i["severity"] == "high"),
-            },
-        )
-        memory.add_trace(msg)
-        return msg

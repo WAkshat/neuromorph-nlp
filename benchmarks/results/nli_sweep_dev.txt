@@ -1,0 +1,18 @@
+cross-encoder/nli-MiniLM2-L6-H768 on dev: 130.5 ms/claim
+contradiction arm only (flag if c >= tc):
+  tc=0.5                       TP=23 FP=10 FN=12  P=0.70 R=0.66
+  tc=0.8                       TP=21 FP= 4 FN=14  P=0.84 R=0.60
+  tc=0.9                       TP=15 FP= 4 FN=20  P=0.79 R=0.43
+  tc=0.95                      TP=13 FP= 3 FN=22  P=0.81 R=0.37
+  tc=0.99                      TP= 5 FP= 2 FN=30  P=0.71 R=0.14
+myth-entailment arm only (flag if m >= tm):
+  tm=0.5                       TP= 6 FP= 0 FN=29  P=1.00 R=0.17
+  tm=0.8                       TP= 5 FP= 0 FN=30  P=1.00 R=0.14
+  tm=0.9                       TP= 5 FP= 0 FN=30  P=1.00 R=0.14
+  tm=0.95                      TP= 3 FP= 0 FN=32  P=1.00 R=0.09
+  tm=0.99                      TP= 0 FP= 0 FN=35  P=0.00 R=0.00
+correct ('ok') claims with c >= 0.9:
+  c=0.920 d-c1 TrueNorth, developed by IBM, integrates one million neurons and 256 million synapses in 4096 cores.
+  c=0.993 d-c4 The BrainScaleS system from Heidelberg University uses analog neuron circuits that operate on accelerated time scales.
+  c=0.992 d-n2 TrueNorth has no flexible on-chip learning, so networks must be trained offline before deployment.
+  c=0.985 d-n10 SpiNNaker is not an analog system; it is built entirely from digital ARM cores.

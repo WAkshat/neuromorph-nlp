@@ -50,6 +50,8 @@ def main():
     ap.add_argument("--split", choices=["dev", "test"], required=True)
     ap.add_argument("--verifiers", help="current only: comma-separated subset, e.g. 'overclaim,constraints'")
     ap.add_argument("--nli", action="store_true", help="current only: enable the optional NLI verifier")
+    ap.add_argument("--nli-contradiction", type=float, metavar="T",
+                    help="with --nli: also flag claims whose P(contradiction | retrieved fact) >= T")
     ap.add_argument("--no-negation", action="store_true", help="current only: ablate negation/contrast handling")
     ap.add_argument("--errors", action="store_true", help="print misclassified items")
     ap.add_argument("--out", help="write the result JSON here")
@@ -60,6 +62,8 @@ def main():
         config["verifiers"] = tuple(v for v in args.verifiers.split(",") if v)
     if args.nli:
         config["nli"] = True
+    if args.nli_contradiction is not None:
+        config["nli_contradiction_threshold"] = args.nli_contradiction
     if args.no_negation:
         config["negation_aware"] = False
     orch = load_orchestrator(args.system, **config)
